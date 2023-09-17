@@ -4,7 +4,7 @@ public class DispositivoEntrada {
     protected String tipoEntrada;
     protected String marca;
 
-    public DispositivoEntrada(java.lang.String tipoEntrada, java.lang.String marca) {
+    protected DispositivoEntrada(java.lang.String tipoEntrada, java.lang.String marca) {
         this.tipoEntrada = tipoEntrada;
         this.marca = marca;
     }
