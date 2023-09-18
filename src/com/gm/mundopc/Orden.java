@@ -17,16 +17,25 @@ public class Orden {
 
     public void agregarComputadoras() {
         var computadora = llenarDatos();
-        computadoras[contadorComputadoras] = computadora;
+        if (contadorComputadoras < MAX_COMPUTADORAS) {
+            computadoras[contadorComputadoras] = computadora;
+            this.contadorComputadoras++;
+        } else {
+            System.out.println("No se pueden agregar más computadoras");
+        }
     }
 
     public void mostrarOrden() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("\t.:Orden #").append(idOrden).append(":.\n");
         buffer.append("Cantidad de computadoras: ").append(contadorComputadoras).append("\n");
-        for (var computadora : computadoras) {
-            buffer.append("Computadora:\n").append(computadora.toString());
-            buffer.append("\n");
+        if (contadorComputadoras > 0) {
+            for (var computadora : computadoras) {
+                if (computadora != null) {
+                    buffer.append("Computadora:\n").append(computadora.toString());
+                    buffer.append("\n");
+                }
+            }
         }
         buffer.append("----------------------------------------------------------");
         System.out.println(buffer);
@@ -53,19 +62,24 @@ public class Orden {
     }
 
     public void menu() {
-        int option;
+        int option = 0;
         do {
             System.out.println("\t.:Orden de Computadoras:.");
             System.out.println("1. Agregar Computadora");
             System.out.println("2. Mostrar orden");
+            System.out.println("3. Salir");
             System.out.print("Ingresa una opción:\n>>");
-            option = Integer.parseInt(new Scanner(System.in).nextLine());
-            switch (option) {
-                case 1 -> agregarComputadoras();
-                case 2 -> mostrarOrden();
-                default -> {
-                    break;
+            try{
+                option = Integer.parseInt(new Scanner(System.in).nextLine());
+                switch (option) {
+                    case 1 -> agregarComputadoras();
+                    case 2 -> mostrarOrden();
+                    default -> {
+                        break;
+                    }
                 }
+            }catch (Exception e){
+                System.out.println("Opción inválida\n");
             }
         } while (option != 3);
 
